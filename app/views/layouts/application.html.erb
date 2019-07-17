@@ -21,8 +21,8 @@
     <div class="topnav" id="myTopnav">
          <a href="<%=root_path%>" class="active">Home</a>
          <a href="<%=clients_path%>">Clients</a>
-         <a href="<%=projects_path %>">Dashboard</a>
-         <a href="<%= new_project_path  %>">New Project</a>
+         <a href="<%=projects_path  %>" class="all_projects">Dashboard</a>
+         <a href="<%= new_project_path%>" >New Project</a>
          <% if current_user %>
          <a href="<%=logout_path%>">Sign out</a>
          <% end %>
@@ -38,8 +38,10 @@
      <br>
     <% end %>
 
-
+    <div id="app-container">
+      <!-- container will clear out all the files that are in the yield -->
     <%= yield %>
+    </div>
 
     <footer class="branding">
         <small>&copy; 2019 <strong>Project Dashboard</strong></small>
