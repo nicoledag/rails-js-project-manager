@@ -21,6 +21,7 @@
           .then(res => res.json())
           .then(projects => {
             // console.log(projects);
+            $('#app-container').html('')
           })
 
 
