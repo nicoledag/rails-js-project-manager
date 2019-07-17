@@ -1,9 +1,17 @@
 (function(global, $) {
 
 
-  $(document).ready(function() {
+  $(() => {
       console.log( "ready!" );
-  });
+      projectClickHandler()
+  })
 
+
+    const projectClickHandler = () => {
+      $('.all_projects').on('click', e => {
+        e.preventDefault()
+        console.log('hello');
+      })
+    }
 
 }(window, jQuery));
