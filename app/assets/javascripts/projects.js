@@ -43,11 +43,36 @@
 
   Project.prototype.formatIndex = function () {
     let postHtml = `
-      <h1>${this.name}</h1>
+    <div style="overflow-x:auto;">
+      <div class="scrollit">
+        <table id="table">
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Target Completion Date</th>
+            <th>Completion Date</th>
+          </tr>
+
+          <tr>
+           <td>${this.name}</td>
+           <td>${this.description}</td>
+           <td>${this.target_completion_date} </td>
+           <td>${this.completion_date} </td>
+         </tr>
+        </table>
+       </div>
+    </div>
     `
     return postHtml
   }
 
+  // Project.prototype.completedProjects = function () {
+  //   const completed = Project.filter(function(project) {
+  //         project.completion_date !== null
+  //         console.log(completed);
+  //   });
+  //
+  // }
 
 
 }(window, jQuery));
