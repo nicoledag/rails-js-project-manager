@@ -1,0 +1,101 @@
+<h2>Welcome <%=current_user.capitalize%></h2>
+
+<div class="date">
+
+</div>
+
+
+<div class= "admin">
+  <% if current_user.admin%>
+    <h3>ADMIN</h3>
+  <%end%>
+</div>
+
+<h3><%= link_to "Create New Project", new_project_path(@project) %></h3>
+<br>
+
+
+<div class="center">
+<h2>Open Projects</h2>
+</div>
+
+<div style="overflow-x:auto;">
+  <div class="scrollit">
+    <table id="table">
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Client Name</th>
+        <th>Target Completion Date</th>
+        <th>Completion Date</th>
+      </tr>
+     <% @projects.incomplete.each do |p| %>
+      <tr>
+       <td><%= link_to p.name, client_project_path(p.client, p) %></td>
+       <td><%= p.description %></td>
+       <td><%= link_to p.client.company_name, client_path(p.client) %></td>
+       <td><%= p.format_target_date %></td>
+       <td><%= p.format_completed_date %></td>
+     </tr>
+     <% end %>
+    </table>
+   </div>
+</div>
+
+<br>
+<br>
+
+    <h2>Completed Projects</h2>
+
+    <div style="overflow-x:auto;">
+      <div class="scrollit">
+        <table id="table">
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Client Name</th>
+            <th>Target Completion Date</th>
+            <th>Completion Date</th>
+          </tr>
+         <% @projects.complete.each do |p| %>
+          <tr>
+           <td><%= link_to p.name, client_project_path(p.client, p) %></td>
+           <td><%= p.description %></td>
+           <td><%= link_to p.client.company_name, client_path(p.client) %></td>
+           <td><%= p.format_target_date %></td>
+           <td><%= p.format_completed_date %></td>
+         </tr>
+         <% end %>
+        </table>
+       </div>
+    </div>
+
+<br>
+<br>
+
+
+
+<h2>All Projects</h2>
+
+<div style="overflow-x:auto;">
+   <div class="scrollit">
+    <table id="table">
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Client Name</th>
+        <th>Target Completion Date</th>
+        <th>Completion Date</th>
+      </tr>
+      <% @projects.order_newest.each do |p| %>
+      <tr>
+       <td><%= link_to p.name, client_project_path(p.client, p) %></td>
+       <td><%= p.description %></td>
+       <td><%= link_to p.client.company_name, client_path(p.client) %></td>
+       <td><%= p.format_target_date %></td>
+       <td><%= p.format_completed_date %></td>
+     </tr>
+     <% end %>
+    </table>
+  </div>
+</div>
