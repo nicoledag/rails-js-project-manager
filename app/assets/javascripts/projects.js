@@ -23,7 +23,7 @@
         // hijacks nav link for projects.  On method takes in two arguements the click and event
         // and a callback function you want to run when the event happens.
 
-        // history.pushState(null, null, "projects") //updates url path to /projects.
+        history.pushState(null, null, "projects") //updates url path to /projects.
         fetch(`/projects.json`)
         // fetch makes request to backend.  When you call fetch you get a promise.
         // if resolved it takes in a response.  Call json on the resonse and it will parse the data on the response.
@@ -55,7 +55,7 @@
     this.target_completion_date = project.target_completion_date
     this.completion_date = project.completion_date
     this.company_name = project.client.company_name
-    this.content = project.comments.content
+    this.comments = project.comments
   }
 
   Project.prototype.formatIndex = function () {
@@ -67,7 +67,7 @@
       <td>${this.company_name} </td>
       <td>${this.target_completion_date} </td>
       <td>${this.completion_date} </td>
-      <td>${this.content} </td>
+      <td>${this.comments} </td>
 
       </tr>
     `
