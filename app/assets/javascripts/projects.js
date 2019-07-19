@@ -11,25 +11,24 @@
     $('#date').append(date)
   }
 
-  function listenForClick() {
+  const listenForClick = () => {
     $('button#post-data-all-projects').on('click', e => {
-      event.preventDefault()
-      hideTableHeader()
+      e.preventDefault()
       getAllProjects()
-
+      // hideTableHeader()
     })
   }
 
-  function hideTable() {
-    var x = document.getElementById("table-js");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
+  // const hideTableHeader = () => {
+  //   var x = document.getElementById("table-js");
+  //   if (x.style.display === "none") {
+  //     x.style.display = "block";
+  //   } else {
+  //     x.style.display = "none";
+  //   }
+  // }
 
-  function getAllProjects() {
+  const getAllProjects = () => {
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
