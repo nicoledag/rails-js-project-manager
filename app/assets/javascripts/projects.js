@@ -7,19 +7,20 @@
 
   const dateGreeting = () => {
     let d = new Date();
-    let date = $(".date").innerHTML = "<h3>Today's date is " + d + "</h3>"
-    $('.date').append(date)
+    let date = $("#date").innerHTML = "<h3>Today's date is " + d.toDateString() + "</h3>"
+    $('#date').append(date)
   }
 
   function listenForClick() {
     $('button#post-data-all-projects').on('click', e => {
       event.preventDefault()
-      hideButton()
+      hideTableHeader()
       getAllProjects()
+
     })
   }
 
-  function hideButton() {
+  function hideTable() {
     var x = document.getElementById("table-js");
     if (x.style.display === "none") {
       x.style.display = "block";
@@ -38,7 +39,9 @@
               // console.log(newProject);
             // let formatByDate = newProject.formatDate()
              let postHtml = newProject.formatIndex()
+                   // console.log(postHtml);
              $('#table-js').append(postHtml)
+
            })
        })
    }
@@ -46,6 +49,7 @@
    class Project {
     constructor(project) {
        this.name = project.name
+       this.id = project.id
        this.description = project.description
        this.target_completion_date = project.target_completion_date
        this.completion_date = project.completion_date
@@ -59,7 +63,7 @@
   Project.prototype.formatIndex = function () {
     let postHtml = `
       <tr>
-      <td>${this.name} </td>
+      <td><a href="/projects/${this.id}">${this.name} </a></td>
       <td>${this.description} </td>
       <td>${this.company_name} </td>
       <td>${this.target_completion_date} </td>
@@ -68,13 +72,13 @@
     `
     return postHtml
   }
-  //
-  // Project.prototype.formatDate = function () {
-  //  Project.sort(function(a,b){
-  //  return a.created_at > b.created_at;
+
+  //  Project.prototype.formatDate = function () {
+  //    this.sort(function(a,b){
+  //     return a.created_at > b.created_at;
   //   })
   // }
-
+  //
 
 
   // Project.prototype.sortByCompletedDate = function () {
