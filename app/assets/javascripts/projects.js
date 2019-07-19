@@ -2,6 +2,7 @@
   $(() => {
       console.log( "ready!" );
       listenForClick()
+      listenForHideClick()
       dateGreeting()
   })
 
@@ -18,6 +19,15 @@
       // hideTableHeader()
     })
   }
+
+  const listenForHideClick = () => {
+    $('button#hide-data-all-projects').on('click', e => {
+      e.preventDefault()
+      $('#table-js').empty();
+    })
+  }
+
+
 
   // const hideTableHeader = () => {
   //   var x = document.getElementById("table-js");
