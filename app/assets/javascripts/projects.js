@@ -41,9 +41,13 @@
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
-           console.log(projects);
-           projects.forEach(project => {
-
+           // console.log(projects);
+           projects.map(project => {
+             let newProject = new Project(project)
+              // console.log(newProject);
+             let postHtml = newProject.formatIndex()
+             console.log(postHtml);
+             $('#table-js').append(postHtml)
            })
        })
    }
@@ -60,14 +64,13 @@
   }
 
   Project.prototype.formatIndex = function () {
-    let postName = `
+    let postHtml = `
       <tr>
       <td>${this.name} </td>
       <td>${this.description} </td>
       <td>${this.company_name} </td>
       <td>${this.target_completion_date} </td>
       <td>${this.completion_date} </td>
-      <td>${this.comments} </td>
       </tr>
     `
     return postHtml
