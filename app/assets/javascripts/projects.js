@@ -14,7 +14,13 @@
   const listenForClick = () => {
     $('button#post-data-all-projects').on('click', e => {
       e.preventDefault()
-      bindCLickHandlers()
+      getAllPosts()
+      // hideTableHeader()
+    })
+
+    $('button#post-data-open-projects').on('click', e => {
+      e.preventDefault()
+      getOpenPosts()
       // hideTableHeader()
     })
 
@@ -34,7 +40,7 @@
   //   }
   // }
 
-  const bindCLickHandlers = () => {
+  const getAllPosts = () => {
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
@@ -42,14 +48,27 @@
            projects.map(project => {
              let newProject = new Project(project)
               // console.log(newProject);
-            // let formatByDate = newProject.formatDate()
-             let postHtml = newProject.formatIndex()
+             let postAllHtml = newProject.formatIndex()
                    // console.log(postHtml);
-             $('.all-data').append(postHtml)
-
+             $('.all-data').append(postAllHtml)
            })
        })
    }
+
+   const getOpenPosts = () => {
+     fetch(`/projects.json`)
+     .then(res => res.json())
+     .then(projects => {
+            // console.log(projects);
+            projects.map(project => {
+              let newProject = new Project(project)
+               // console.log(newProject);
+              let postOpenHtml = newProject.formatOpenProjects()
+                    // console.log(postHtml);
+              $('.open-data').append(postOpenHtml)
+            })
+        })
+    }
 
    class Project {
     constructor(project) {
@@ -66,7 +85,8 @@
 
 
     formatIndex() {
-      let postHtml = `
+
+      let postAllHtml = `
         <tr>
         <td><a href="/projects/${this.id}">${this.name} </a></td>
         <td>${this.description} </td>
@@ -75,7 +95,27 @@
         <td>${this.completion_date} </td>
         </tr>
       `
-      return postHtml
+      return postAllHtml
+    }
+
+    formatOpenProjects() {
+      // scope :incomplete, -> { where(completion_date: nil).
+      // order(target_completion_date: :asc)}
+
+
+      let postOpenHtml = array.filter(project => project.completion_date === nil);
+
+      `
+        <tr>
+        <td><a href="/projects/${this.id}">${this.name} </a></td>
+        <td>${this.description} </td>
+        <td>${this.company_name} </td>
+        <td>${this.target_completion_date} </td>
+        <td>${this.completion_date} </td>
+        </tr>
+      `
+      return postOpenHtml
+
     }
 
 }
