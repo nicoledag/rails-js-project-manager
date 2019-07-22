@@ -2,7 +2,6 @@
   $(() => {
       console.log( "ready!" );
       listenForClick()
-      listenForHideClick()
       dateGreeting()
   })
 
@@ -18,15 +17,12 @@
       bindCLickHandlers()
       // hideTableHeader()
     })
-  }
 
-  const listenForHideClick = () => {
-    $('button#hide-data-all-projects').on('click', e => {
-      e.preventDefault()
-      $('#table-js').empty();
-    })
+    // $('button#hide-data-all-projects').on('click', e => {
+    //   e.preventDefault()
+    //   $('#table-js').empty();
+    // })
   }
-
 
 
   // const hideTableHeader = () => {
@@ -49,7 +45,7 @@
             // let formatByDate = newProject.formatDate()
              let postHtml = newProject.formatIndex()
                    // console.log(postHtml);
-             $('#table-js').append(postHtml)
+             $('.all-data').append(postHtml)
 
            })
        })
@@ -82,7 +78,7 @@
       return postHtml
     }
 
-  }
+}
 
   //  Project.prototype.formatDate = function () {
   //    this.sort(function(a,b){
