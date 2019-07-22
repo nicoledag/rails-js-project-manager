@@ -15,7 +15,7 @@
   const listenForClick = () => {
     $('button#post-data-all-projects').on('click', e => {
       e.preventDefault()
-      getAllProjects()
+      bindCLickHandlers()
       // hideTableHeader()
     })
   }
@@ -38,7 +38,7 @@
   //   }
   // }
 
-  const getAllProjects = () => {
+  const bindCLickHandlers = () => {
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
@@ -67,19 +67,21 @@
        this.username = project.user.username
        this.created_at = project.created_at
    }
-  }
 
-  Project.prototype.formatIndex = function () {
-    let postHtml = `
-      <tr>
-      <td><a href="/projects/${this.id}">${this.name} </a></td>
-      <td>${this.description} </td>
-      <td>${this.company_name} </td>
-      <td>${this.target_completion_date} </td>
-      <td>${this.completion_date} </td>
-      </tr>
-    `
-    return postHtml
+
+    formatIndex() {
+      let postHtml = `
+        <tr>
+        <td><a href="/projects/${this.id}">${this.name} </a></td>
+        <td>${this.description} </td>
+        <td>${this.company_name} </td>
+        <td>${this.target_completion_date} </td>
+        <td>${this.completion_date} </td>
+        </tr>
+      `
+      return postHtml
+    }
+
   }
 
   //  Project.prototype.formatDate = function () {
