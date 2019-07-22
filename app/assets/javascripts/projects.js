@@ -102,19 +102,21 @@
       // scope :incomplete, -> { where(completion_date: nil).
       // order(target_completion_date: :asc)}
 
+        function filter(array) {
+          let postOpenHtml = array.filter(project => project.completion_date === nil);
+        }
 
-      let postOpenHtml = array.filter(project => project.completion_date === nil);
 
-      `
-        <tr>
-        <td><a href="/projects/${this.id}">${this.name} </a></td>
-        <td>${this.description} </td>
-        <td>${this.company_name} </td>
-        <td>${this.target_completion_date} </td>
-        <td>${this.completion_date} </td>
-        </tr>
-      `
-      return postOpenHtml
+      // `
+      //   <tr>
+      //   <td><a href="/projects/${this.id}">${this.name} </a></td>
+      //   <td>${this.description} </td>
+      //   <td>${this.company_name} </td>
+      //   <td>${this.target_completion_date} </td>
+      //   <td>${this.completion_date} </td>
+      //   </tr>
+      // `
+      // return postOpenHtml
 
     }
 
