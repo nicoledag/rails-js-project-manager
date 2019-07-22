@@ -64,7 +64,7 @@
               let newProject = new Project(project)
                // console.log(newProject);
               let postOpenHtml = newProject.formatOpenProjects()
-                    // console.log(postHtml);
+                    console.log(postOpenHtml);
               $('.open-data').append(postOpenHtml)
             })
         })
@@ -98,12 +98,13 @@
       return postAllHtml
     }
 
-    formatOpenProjects() {
+    formatOpenProjects(array) {
       // scope :incomplete, -> { where(completion_date: nil).
       // order(target_completion_date: :asc)}
 
         function filter(array) {
           let postOpenHtml = array.filter(project => project.completion_date === nil);
+          return postOpenHtml
         }
 
 
