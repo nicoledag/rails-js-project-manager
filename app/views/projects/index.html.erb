@@ -11,13 +11,54 @@
 <h3><%= link_to "Create New Project", new_project_path(@project) %></h3>
 <br>
 
+<button id="post-data-open-projects" class="button button2">Open Projects</button>
+<br>
+<br>
+
+<div style="overflow-x:auto;">
+  <div class="scrollit">
+    <table id="table-js" >
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Client Name</th>
+        <th>Target Completion Date</th>
+        <th>Completion Date</th>
+      </tr>
+      <tbody class="open-data">
+      <!-- here goes our data! -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<button id="post-data-completed-projects" class="button button2">Completed Projects</button>
+<br>
+<br>
+
+<div style="overflow-x:auto;">
+  <div class="scrollit">
+    <table id="table-js" >
+      <tr>
+        <th>Project Name</th>
+        <th>Description</th>
+        <th>Client Name</th>
+        <th>Target Completion Date</th>
+        <th>Completion Date</th>
+      </tr>
+      <tbody class="completed-data">
+      <!-- here goes our data! -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <button id="post-data-all-projects" class="button button2">All Projects</button>
 <br>
 <br>
 <!-- <button id="hide-data-all-projects" class="button button2">Hide Projects</button>
 <br>
 <br> -->
-
 
 <div style="overflow-x:auto;">
   <div class="scrollit">
