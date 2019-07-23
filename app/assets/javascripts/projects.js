@@ -2,6 +2,7 @@
   $(() => {
       console.log( "ready!" );
       listenForClick()
+      bindClickHandlers()
       dateGreeting()
   })
 
@@ -29,12 +30,18 @@
       getCompletedPosts()
       // hideTableHeader()
     })
-
     // $('button#hide-data-all-projects').on('click', e => {
     //   e.preventDefault()
     //   $('#table-js').empty();
     // })
   }
+
+    const bindClickHandlers = () => {
+      $(document).on('click', ".show_link", function(e) {
+        e.preventDefault()
+        console.log('hello');
+      })
+    }
 
 
   // const hideTableHeader = () => {
