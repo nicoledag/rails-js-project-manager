@@ -124,7 +124,7 @@
     formatIndex() {
       let postHtml = `
         <tr>
-        <td><a href="/projects/${this.id}">${this.name} </a></td>
+        <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
         <td>${this.description} </td>
         <td>${this.company_name} </td>
         <td>${this.target_completion_date} </td>
