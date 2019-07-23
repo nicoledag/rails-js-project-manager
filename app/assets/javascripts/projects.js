@@ -48,9 +48,9 @@
            projects.map(project => {
              let newProject = new Project(project)
               // console.log(newProject);
-             let postAllHtml = newProject.formatIndex()
+             let postHtml = newProject.formatIndex()
                    // console.log(postHtml);
-             $('.all-data').append(postAllHtml)
+             $('.all-data').append(postHtml)
            })
        })
    }
@@ -59,23 +59,22 @@
      fetch(`/projects.json`)
      .then(res => res.json())
      .then(projects => {
-            console.log(projects);
+            // console.log(projects);
 
-            const sort = projects
-
+            const openProjects = projects
             .filter(project => {
               return project.completion_date === null;
             })
 
-            console.log(sort);
+            // console.log(openProjects);
 
-            projects.map(project => {
+            openProjects.map(project => {
               let newProject = new Project(project)
-               // console.log(newProject);
+               console.log(newProject);
 
-              let postOpenHtml = newProject.formatOpenProjects()
+              let postHtml = newProject.formatIndex()
                     // console.log(postOpenHtml);
-              $('.open-data').append(postOpenHtml)
+              $('.open-data').append(postHtml)
             })
         })
     }
@@ -95,7 +94,7 @@
 
 
     formatIndex() {
-      let postAllHtml = `
+      let postHtml = `
         <tr>
         <td><a href="/projects/${this.id}">${this.name} </a></td>
         <td>${this.description} </td>
@@ -104,30 +103,7 @@
         <td>${this.completion_date} </td>
         </tr>
       `
-      return postAllHtml
-    }
-
-    formatOpenProjects(array) {
-      // scope :incomplete, -> { where(completion_date: nil).
-      // order(target_completion_date: :asc)}
-
-        function filter(array) {
-          let postOpenHtml = array.filter(project => project.completion_date === nil);
-          return postOpenHtml
-        }
-
-
-      // `
-      //   <tr>
-      //   <td><a href="/projects/${this.id}">${this.name} </a></td>
-      //   <td>${this.description} </td>
-      //   <td>${this.company_name} </td>
-      //   <td>${this.target_completion_date} </td>
-      //   <td>${this.completion_date} </td>
-      //   </tr>
-      // `
-      // return postOpenHtml
-
+      return postHtml
     }
 
 }
