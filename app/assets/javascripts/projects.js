@@ -12,13 +12,13 @@
   }
 
   const listenForClick = () => {
-    $('button#post-data-all-projects').on('click', e => {
+    $('button#post-data-all-projects').one('click', e => {
       e.preventDefault()
       getAllPosts()
       // hideTableHeader()
     })
 
-    $('button#post-data-open-projects').on('click', e => {
+    $('button#post-data-open-projects').one('click', e => {
       e.preventDefault()
       getOpenPosts()
       // hideTableHeader()
@@ -45,7 +45,15 @@
     .then(res => res.json())
     .then(projects => {
            // console.log(projects);
-           projects.map(project => {
+
+           const allProjects = projects
+           .sort(function(a,b){
+             let dateA = new Date(a.created_at), dateB = new Date(b.created);
+             return dateA - dateB;
+           })
+           // console.log(allProjects);
+
+           allProjects.map(project => {
              let newProject = new Project(project)
               // console.log(newProject);
              let postHtml = newProject.formatIndex()
@@ -65,13 +73,12 @@
               return project.completion_date === null;
             })
 
-            const sort = openProjects.sort(function(a,b){
-              var dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
+            .sort(function(a,b){
+              let dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
               return dateA - dateB;
             })
 
             // console.log(openProjects);
-            console.log(sort);
 
             openProjects.map(project => {
               let newProject = new Project(project)
@@ -110,21 +117,4 @@
       `
       return postHtml
     }
-
-}
-
-  //  Project.prototype.formatDate = function () {
-  //    this.sort(function(a,b){
-  //     return a.created_at > b.created_at;
-  //   })
-  // }
-  //
-
-
-  // Project.prototype.sortByCompletedDate = function () {
-  //   const completed = Project.filter(function(project) {
-  //         project.completion_date !== null
-  //         console.log(completed);
-  //   });
-  //
-  // }
+  }
