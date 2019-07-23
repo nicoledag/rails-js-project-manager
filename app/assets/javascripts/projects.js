@@ -59,12 +59,18 @@
      fetch(`/projects.json`)
      .then(res => res.json())
      .then(projects => {
-            // console.log(projects);
+            console.log(projects);
+
+          // const sort = projects.map(project => {
+          //     return project.completion_date === null;
+          //   });
+
             projects.map(project => {
               let newProject = new Project(project)
-               // console.log(newProject);
+               console.log(newProject);
+
               let postOpenHtml = newProject.formatOpenProjects()
-                    console.log(postOpenHtml);
+                    // console.log(postOpenHtml);
               $('.open-data').append(postOpenHtml)
             })
         })
@@ -85,7 +91,6 @@
 
 
     formatIndex() {
-
       let postAllHtml = `
         <tr>
         <td><a href="/projects/${this.id}">${this.name} </a></td>
