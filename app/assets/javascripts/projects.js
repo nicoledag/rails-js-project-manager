@@ -36,13 +36,6 @@
     // })
   }
 
-    const bindClickHandlers = () => {
-      $(document).on('click', ".show_link", function(e) {
-        e.preventDefault()
-        console.log('hello');
-      })
-    }
-
 
   // const hideTableHeader = () => {
   //   var x = document.getElementById("table-js");
@@ -114,6 +107,29 @@
      }
 
 
+     const bindClickHandlers = () => {
+       $(document).on('click', ".show_link", function(e) {
+         e.preventDefault()
+         // console.log(this);
+
+         // PUT HISTORY
+
+         $('#app-container').html('')
+         let id = $(this).attr('data-id')
+         fetch(`/projects/${id}.json`)
+         .then(res => res.json())
+         .then(project => {
+           let newProject = new Project(project)
+           let postHtml = newProject.formatShow()
+           $('#app-container').append(postHtml)
+
+           // ADD COMMENT
+           
+         })
+       })
+     }
+
+
    class Project {
     constructor(project) {
        this.name = project.name
@@ -137,6 +153,29 @@
         <td>${this.target_completion_date} </td>
         <td>${this.completion_date} </td>
         </tr>
+      `
+      return postHtml
+    }
+
+    formatShow() {
+      let postHtml = `
+
+        <table id="table-js" >
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Client Name</th>
+            <th>Target Completion Date</th>
+            <th>Completion Date</th>
+          </tr>
+          <tr>
+          <td>${this.name}</td>
+          <td>${this.description} </td>
+          <td>${this.company_name} </td>
+          <td>${this.target_completion_date} </td>
+          <td>${this.completion_date} </td>
+          </tr>
+        </table>
       `
       return postHtml
     }
