@@ -60,17 +60,22 @@
      .then(res => res.json())
      .then(projects => {
             // console.log(projects);
-
             const openProjects = projects
             .filter(project => {
               return project.completion_date === null;
             })
 
+            const sort = openProjects.sort(function(a,b){
+              var dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
+              return dateA - dateB;
+            })
+
             // console.log(openProjects);
+            console.log(sort);
 
             openProjects.map(project => {
               let newProject = new Project(project)
-               console.log(newProject);
+               // console.log(newProject);
 
               let postHtml = newProject.formatIndex()
                     // console.log(postOpenHtml);
