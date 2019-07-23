@@ -61,13 +61,17 @@
      .then(projects => {
             console.log(projects);
 
-          // const sort = projects.map(project => {
-          //     return project.completion_date === null;
-          //   });
+            const sort = projects
+
+            .filter(project => {
+              return project.completion_date === null;
+            })
+
+            console.log(sort);
 
             projects.map(project => {
               let newProject = new Project(project)
-               console.log(newProject);
+               // console.log(newProject);
 
               let postOpenHtml = newProject.formatOpenProjects()
                     // console.log(postOpenHtml);
