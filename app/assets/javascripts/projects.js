@@ -24,6 +24,12 @@
       // hideTableHeader()
     })
 
+    $('button#post-data-completed-projects').one('click', e => {
+      e.preventDefault()
+      getCompletedPosts()
+      // hideTableHeader()
+    })
+
     // $('button#hide-data-all-projects').on('click', e => {
     //   e.preventDefault()
     //   $('#table-js').empty();
@@ -44,20 +50,14 @@
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
-           // console.log(projects);
-
            const allProjects = projects
            .sort(function(a,b){
              let dateA = new Date(a.created_at), dateB = new Date(b.created);
              return dateA - dateB;
            })
-           // console.log(allProjects);
-
            allProjects.map(project => {
              let newProject = new Project(project)
-              // console.log(newProject);
              let postHtml = newProject.formatIndex()
-                   // console.log(postHtml);
              $('.all-data').append(postHtml)
            })
        })
@@ -67,29 +67,45 @@
      fetch(`/projects.json`)
      .then(res => res.json())
      .then(projects => {
-            // console.log(projects);
             const openProjects = projects
             .filter(project => {
               return project.completion_date === null;
             })
-
             .sort(function(a,b){
               let dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
               return dateA - dateB;
             })
-
-            // console.log(openProjects);
-
             openProjects.map(project => {
               let newProject = new Project(project)
-               // console.log(newProject);
-
               let postHtml = newProject.formatIndex()
-                    // console.log(postOpenHtml);
               $('.open-data').append(postHtml)
             })
         })
     }
+
+
+    const getCompletedPosts = () => {
+      fetch(`/projects.json`)
+      .then(res => res.json())
+      .then(projects => {
+             // console.log(projects);
+             const completedProjects = projects
+             .filter(project => {
+               return project.completion_date !== null;
+             })
+             .sort(function(a,b){
+               let dateA = new Date(a.completion_date), dateB = new Date(b.completion_date);
+               return dateB - dateA;
+             })
+             completedProjects.map(project => {
+               let newProject = new Project(project)
+               let postHtml = newProject.formatIndex()
+
+               $('.completed-data').append(postHtml)
+             })
+         })
+     }
+
 
    class Project {
     constructor(project) {
