@@ -1,6 +1,6 @@
-<h2>Welcome <%=current_user.capitalize%></h2>
+<h2 class="color_red">Welcome <%=current_user.capitalize%></h2>
 
-<div id="date"></div>
+<div id="date" class="color_red"></div>
 
 <div class= "admin">
   <% if current_user.admin%>
@@ -11,7 +11,7 @@
 <h3><%= link_to "Create New Project", new_project_path(@project) %></h3>
 <br>
 
-<button id="post-data-open-projects" class="button button2">Open Projects</button>
+<button id="post-data-open-projects" class="button">Open Projects</button>
 <br>
 <br>
 
@@ -32,6 +32,8 @@
   </div>
 </div>
 
+<br>
+<br>
 <button id="post-data-completed-projects" class="button button2">Completed Projects</button>
 <br>
 <br>
@@ -53,6 +55,8 @@
   </div>
 </div>
 
+<br>
+<br>
 <button id="post-data-all-projects" class="button button2">All Projects</button>
 <br>
 <br>
