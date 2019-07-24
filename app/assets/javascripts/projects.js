@@ -153,10 +153,12 @@
 
 
     formatShow() {
-
-      let postComment = this.comments.map(comment => { return ( `${comment.content}` ) })
+      let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
+      let commentCreatedAt = this.comments.map(comment => { return ( `${comment.created_at}` ) })
+      let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
 
       let postHtml = `
+        <h2>Project</h2>
         <table id="table-js" >
           <tr>
             <th>Project Name</th>
@@ -177,20 +179,32 @@
         <br>
         <br>
         <br>
+        <h2>Project Comments</h2>
+
+        <td><a href="/projects/${this.id}/comments/new" </a>New Comment</td>
+        <br>
+        <br>
 
         <table id="table-js" >
           <tr>
-            <th>Comment</th>
+            <th>Date Created</th>
+            <th>Content</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
           <tr>
 
           <tr>
-          <td>${postComment} </td>
+          <td>${commentCreatedAt}</td>
+          <td>${commentContent} </td>
+          <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
+          <td><a href="/comments/${commentId}/delete" </a>Delete Comment</td>
           </tr>
           </table>
-
       `
       return postHtml
+
+      // How to delete comment?
 
     }
 

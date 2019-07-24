@@ -1,4 +1,4 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :content
+  attributes :id, :content, :created_at
   belongs_to :project
 end
