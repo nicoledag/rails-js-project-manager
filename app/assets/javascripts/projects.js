@@ -1,9 +1,9 @@
 
   $(() => {
       console.log( "ready!" );
-      listenForClick()
       bindClickHandlers()
       dateGreeting()
+      getProject()
   })
 
   const dateGreeting = () => {
@@ -12,30 +12,31 @@
     $('#date').append(date)
   }
 
-  const listenForClick = () => {
+  const bindClickHandlers = () => {
     $('button#post-data-all-projects').one('click', e => {
       e.preventDefault()
-      getAllPosts()
+      getAllProjects()
       // hideTableHeader()
     })
 
     $('button#post-data-open-projects').one('click', e => {
       e.preventDefault()
-      getOpenPosts()
+      getOpenProjects()
       // hideTableHeader()
     })
 
     $('button#post-data-completed-projects').one('click', e => {
       e.preventDefault()
-      getCompletedPosts()
+      getCompletedProjects()
       // hideTableHeader()
     })
+
     // $('button#hide-data-all-projects').on('click', e => {
     //   e.preventDefault()
     //   $('#table-js').empty();
     // })
-  }
 
+  }
 
   // const hideTableHeader = () => {
   //   var x = document.getElementById("table-js");
@@ -46,7 +47,7 @@
   //   }
   // }
 
-  const getAllPosts = () => {
+  const getAllProjects = () => {
     fetch(`/projects.json`)
     .then(res => res.json())
     .then(projects => {
@@ -63,7 +64,7 @@
        })
    }
 
-   const getOpenPosts = () => {
+   const getOpenProjects = () => {
      fetch(`/projects.json`)
      .then(res => res.json())
      .then(projects => {
@@ -84,7 +85,7 @@
     }
 
 
-    const getCompletedPosts = () => {
+    const getCompletedProjects = () => {
       fetch(`/projects.json`)
       .then(res => res.json())
       .then(projects => {
@@ -100,33 +101,26 @@
              completedProjects.map(project => {
                let newProject = new Project(project)
                let postHtml = newProject.formatIndex()
-
                $('.completed-data').append(postHtml)
              })
          })
      }
 
 
-     const bindClickHandlers = () => {
+     const getProject = () => {
        $(document).on('click', ".show_link", function(e) {
          e.preventDefault()
-         // console.log(this);
-
-         // PUT HISTORY
-
          $('#app-container').html('')
          let id = $(this).attr('data-id')
          fetch(`/projects/${id}.json`)
          .then(res => res.json())
          .then(project => {
            let newProject = new Project(project)
+           console.log(newProject);
            let postHtml = newProject.formatShow()
            $('#app-container').append(postHtml)
-
-           // ADD COMMENT
-           
-         })
        })
+      })
      }
 
 
@@ -157,9 +151,12 @@
       return postHtml
     }
 
-    formatShow() {
-      let postHtml = `
 
+    formatShow() {
+
+      let postComment = this.comments.map(comment => { return ( `${comment.content}` ) })
+
+      let postHtml = `
         <table id="table-js" >
           <tr>
             <th>Project Name</th>
@@ -176,7 +173,25 @@
           <td>${this.completion_date} </td>
           </tr>
         </table>
+
+        <br>
+        <br>
+        <br>
+
+        <table id="table-js" >
+          <tr>
+            <th>Comment</th>
+          </tr>
+          <tr>
+
+          <tr>
+          <td>${postComment} </td>
+          </tr>
+          </table>
+
       `
       return postHtml
+
     }
+
   }
