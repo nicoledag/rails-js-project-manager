@@ -185,7 +185,9 @@
 
     formatShow() {
       let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
-      let commentCreatedAt = this.comments.map(comment => { return ( `${comment.created_at}` ) })
+
+      let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toDateString() ) })
+
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
 
       let postHtml = `
