@@ -11,6 +11,7 @@
     $('#date').append(date)
   }
 
+
   const bindClickHandlers = () => {
     $('button#post-data-all-projects').one('click', e => {
       e.preventDefault()
@@ -113,6 +114,20 @@
          })
      }
 
+     const welcome = () => {
+       fetch(`/projects.json`)
+       .then(res => res.json())
+       .then(projects => {
+         projects.map(project => {
+         let newProject = new Project(project)
+         let greeting = newProject.greeting()
+         $('.greeting').append(greeting)
+
+        })
+     })
+
+    }
+
 
 
    class Project {
@@ -130,16 +145,34 @@
 
 
     formatIndex() {
-      let postHtml = `
-        <tr>
-        <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
-        <td>${this.description} </td>
-        <td>${this.company_name} </td>
-        <td>${this.target_completion_date} </td>
-        <td>${this.completion_date} </td>
-        </tr>
-      `
-      return postHtml
+      if (this.completion_date === null) {
+        let postHtml = `
+          <tr>
+          <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
+          <td>${this.description} </td>
+          <td>${this.company_name} </td>
+          <td>${this.target_completion_date} </td>
+          <td>${this.completion_date = " "} </td>
+          </tr>
+        `
+        return postHtml
+
+
+      } else {
+        let postHtml = `
+          <tr>
+          <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
+          <td>${this.description} </td>
+          <td>${this.company_name} </td>
+          <td>${this.target_completion_date} </td>
+          <td>${this.completion_date} </td>
+          </tr>
+        `
+        return postHtml
+
+      }
+
+
     }
 
 
@@ -171,8 +204,7 @@
         <br>
         <br>
         <h2>Project Comments</h2>
-
-        <td><a href="/projects/${this.id}/comments/new" </a>New Comment</td>
+        <a href="/projects/${this.id}/comments/new">New Comment</a>
         <br>
         <br>
 
