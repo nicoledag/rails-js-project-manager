@@ -3,7 +3,6 @@
       console.log( "ready!" );
       bindClickHandlers()
       dateGreeting()
-      getProject()
   })
 
   const dateGreeting = () => {
@@ -22,19 +21,27 @@
     $('button#post-data-open-projects').one('click', e => {
       e.preventDefault()
       getOpenProjects()
-      // hideTableHeader()
     })
 
     $('button#post-data-completed-projects').one('click', e => {
       e.preventDefault()
       getCompletedProjects()
-      // hideTableHeader()
     })
 
-    // $('button#hide-data-all-projects').on('click', e => {
-    //   e.preventDefault()
-    //   $('#table-js').empty();
-    // })
+  // Event handler to get a project and comment.
+      $(document).on('click', ".show_link", function(e) {
+        e.preventDefault()
+        $('#app-container').html('')
+        let id = $(this).attr('data-id')
+        fetch(`/projects/${id}.json`)
+        .then(res => res.json())
+        .then(project => {
+          let newProject = new Project(project)
+          console.log(newProject);
+          let postHtml = newProject.formatShow()
+          $('#app-container').append(postHtml)
+      })
+     })
 
   }
 
@@ -106,22 +113,6 @@
          })
      }
 
-
-     const getProject = () => {
-       $(document).on('click', ".show_link", function(e) {
-         e.preventDefault()
-         $('#app-container').html('')
-         let id = $(this).attr('data-id')
-         fetch(`/projects/${id}.json`)
-         .then(res => res.json())
-         .then(project => {
-           let newProject = new Project(project)
-           console.log(newProject);
-           let postHtml = newProject.formatShow()
-           $('#app-container').append(postHtml)
-       })
-      })
-     }
 
 
    class Project {
