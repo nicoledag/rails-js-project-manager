@@ -44,6 +44,18 @@
       })
      })
 
+     $(".new_project").on("submit", function(e) {
+       e.preventDefault()
+       const values = $(this).serialize()
+       $.post("/projects", values).done (function(data) {
+         console.log(data);
+         $("#app-container").html("")
+         const newProject = new Project(data)
+         const addHtml = newProject.formatShow()
+         $("#app-container").html(addHtml)
+         })
+     })
+
   }
 
   // const hideTableHeader = () => {
@@ -61,8 +73,8 @@
     .then(projects => {
            const allProjects = projects
            .sort(function(a,b){
-             let dateA = new Date(a.created_at), dateB = new Date(b.created);
-             return dateA - dateB;
+             let dateA = new Date(a.created_at), dateB = new Date(b.created_at);
+             return dateB - dateA;
            })
            allProjects.map(project => {
              let newProject = new Project(project)
@@ -129,7 +141,6 @@
     }
 
 
-
    class Project {
     constructor(project) {
        this.name = project.name
@@ -157,7 +168,6 @@
         `
         return postHtml
 
-
       } else {
         let postHtml = `
           <tr>
@@ -169,10 +179,7 @@
           </tr>
         `
         return postHtml
-
       }
-
-
     }
 
 
