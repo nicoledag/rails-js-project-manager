@@ -19,9 +19,11 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @project = current_user.projects.build(project_params)
       if @project.save
-        redirect_to client_project_path(@project.client, @project)
+        render json: @project
+        # redirect_to client_project_path(@project.client, @project)
       else
         render :new  #does not send a new get request.  lets us call field w/errors.  Keeps inputted data.  #renders users/new form.
       end
