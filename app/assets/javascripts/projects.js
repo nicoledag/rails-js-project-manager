@@ -45,9 +45,11 @@
      // Event handler to submit form via AJAX.
      $(".new_project").on("submit", function(e) {
          e.preventDefault()
+         // console.log(this);
          const values = $(this).serialize()
+         // console.log(values);
          $.post("/projects", values).done (function(data) {
-         console.log(data);
+         // console.log(data);
          $("#app-container").html("")
          const newProject = new Project(data)
          const addHtml = newProject.formatShow()
@@ -169,7 +171,7 @@
       let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
-
+      
       if (this.completion_date === null) {
 
       let postHtml = `
@@ -179,15 +181,21 @@
             <th>Project Name</th>
             <th>Description</th>
             <th>Client Name</th>
+            <th>Manager</th>
             <th>Target Completion Date</th>
             <th>Completion Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
           <tr>
           <td>${this.name}</td>
           <td>${this.description} </td>
           <td>${this.company_name} </td>
+          <td>${this.username} </td>
           <td>${formatTargetDate} </td>
           <td>${this.completion_date = ""} </td>
+          <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
+          <td><a href="/projects/${this.id}" data-method="delete" </a>Delete Project</td>
           </tr>
         </table>
         <br>
@@ -228,15 +236,21 @@
               <th>Project Name</th>
               <th>Description</th>
               <th>Client Name</th>
+              <th>Manager</th>
               <th>Target Completion Date</th>
               <th>Completion Date</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
             <tr>
             <td>${this.name}</td>
             <td>${this.description} </td>
             <td>${this.company_name} </td>
+            <td>${this.username} </td>
             <td>${formatTargetDate} </td>
             <td>${formatCompleteDate} </td>
+            <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
+            <td><a href="/projects/${this.id}/delete" </a>Delete Project</td>
             </tr>
           </table>
 
