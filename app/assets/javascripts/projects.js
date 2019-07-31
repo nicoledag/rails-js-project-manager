@@ -22,6 +22,11 @@
       getOpenProjects()
     })
 
+    $('button#post-data-alpha-projects').one('click', e => {
+      e.preventDefault()
+      getAlphaProjects()
+    })
+
     $('button#post-data-completed-projects').one('click', e => {
       e.preventDefault()
       getCompletedProjects()
@@ -46,8 +51,12 @@
      $(".new_project").on("submit", function(e) {
          e.preventDefault()
          // console.log(this);
+         // "this" is the form data which we serialize to json format.
          const values = $(this).serialize()
          // console.log(values);
+         // .post makes post request to our back end. create action uses post.
+         // then we chain a method .done which takes in a callback function that gives
+         // us the data that is returned to us by the server.
          $.post("/projects", values).done (function(data) {
          // console.log(data);
          $("#app-container").html("")
@@ -95,6 +104,37 @@
             })
         })
     }
+
+
+    const getAlphaProjects = () => {
+      fetch(`/projects.json`)
+      .then(res => res.json())
+      .then(projects => {
+             const openProjects = projects
+             .filter(project => {
+               return project.completion_date === null;
+             })
+             .sort(function(a, b) {
+                var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+
+                // names must be equal
+                return 0;
+              });
+             openProjects.map(project => {
+               let newProject = new Project(project)
+               let postHtml = newProject.formatIndex()
+               $('.open-data').append(postHtml)
+             })
+         })
+     }
+
 
 
     const getCompletedProjects = () => {
@@ -171,7 +211,7 @@
       let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
-      
+
       if (this.completion_date === null) {
 
       let postHtml = `
