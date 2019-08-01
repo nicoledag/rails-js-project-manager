@@ -22,11 +22,6 @@
       getOpenProjects()
     })
 
-    $('button#post-data-alpha-projects').one('click', e => {
-      e.preventDefault()
-      getAlphaProjects()
-    })
-
     $('button#post-data-completed-projects').one('click', e => {
       e.preventDefault()
       getCompletedProjects()
@@ -41,7 +36,11 @@
         .then(res => res.json())
         .then(project => {
         let newProject = new Project(project)
-        console.log(newProject);
+        // console.log(newProject);
+        // const addHtmlComment = newProject.map(comment => {
+        //         return comment.created_at;
+        //         return comment.content;
+        //       })
         let postHtml = newProject.formatShow()
         $('#app-container').append(postHtml)
       })
@@ -104,37 +103,6 @@
             })
         })
     }
-
-
-    const getAlphaProjects = () => {
-      fetch(`/projects.json`)
-      .then(res => res.json())
-      .then(projects => {
-             const openProjects = projects
-             .filter(project => {
-               return project.completion_date === null;
-             })
-             .sort(function(a, b) {
-                var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-                if (nameA < nameB) {
-                  return -1;
-                }
-                if (nameA > nameB) {
-                  return 1;
-                }
-
-                // names must be equal
-                return 0;
-              });
-             openProjects.map(project => {
-               let newProject = new Project(project)
-               let postHtml = newProject.formatIndex()
-               $('.open-data').append(postHtml)
-             })
-         })
-     }
-
 
 
     const getCompletedProjects = () => {
