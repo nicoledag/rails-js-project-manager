@@ -37,10 +37,6 @@
         .then(project => {
         let newProject = new Project(project)
         // console.log(newProject);
-        // const addHtmlComment = newProject.map(comment => {
-        //         return comment.created_at;
-        //         return comment.content;
-        //       })
         let postHtml = newProject.formatShow()
         $('#app-container').append(postHtml)
       })
@@ -96,8 +92,10 @@
               let dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
               return dateA - dateB;
             })
+            console.log(openProjects);
             openProjects.map(project => {
               let newProject = new Project(project)
+              console.log(newProject);
               let postHtml = newProject.formatIndex()
               $('.open-data').append(postHtml)
             })
@@ -175,9 +173,9 @@
 
 
     formatShow() {
-      let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
-      let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
-      let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
+      let commentContent = this.comments.map(function (comment) { return ( `${comment.content}` ) })
+      let commentCreatedAt = this.comments.map(function (comment) { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
+      let commentId = this.comments.map(function(comment) { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
 
       if (this.completion_date === null) {
@@ -276,6 +274,7 @@
         </table>
       `
       return postHtml
+
 
 
       }
