@@ -147,11 +147,11 @@
       if (this.completion_date === null) {
         let postHtml = `
           <tr>
-          <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
-          <td>${this.description} </td>
-          <td>${this.company_name} </td>
-          <td>${formatTargetDate} </td>
-          <td>${this.completion_date = " "} </td>
+            <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
+            <td>${this.description} </td>
+            <td>${this.company_name} </td>
+            <td>${formatTargetDate} </td>
+            <td>${this.completion_date = " "} </td>
           </tr>
         `
         return postHtml
@@ -162,11 +162,11 @@
 
         let postHtml = `
           <tr>
-          <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
-          <td>${this.description} </td>
-          <td>${this.company_name} </td>
-          <td>${formatTargetDate} </td>
-          <td>${formatCompleteDate} </td>
+            <td><a href="/projects/${this.id}" data-id="${this.id}" class="show_link">${this.name} </a></td>
+            <td>${this.description} </td>
+            <td>${this.company_name} </td>
+            <td>${formatTargetDate} </td>
+            <td>${formatCompleteDate} </td>
           </tr>
         `
         return postHtml
@@ -193,17 +193,15 @@
             <th>Target Completion Date</th>
             <th>Completion Date</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
           <tr>
-          <td>${this.name}</td>
-          <td>${this.description} </td>
-          <td>${this.company_name} </td>
-          <td>${this.username} </td>
-          <td>${formatTargetDate} </td>
-          <td>${this.completion_date = ""} </td>
-          <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
-          <td><a href="/projects/${this.id}" data-method="delete" </a>Delete Project</td>
+            <td>${this.name}</td>
+            <td>${this.description} </td>
+            <td>${this.company_name} </td>
+            <td>${this.username} </td>
+            <td>${formatTargetDate} </td>
+            <td>${this.completion_date = ""} </td>
+            <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
           </tr>
         </table>
         <br>
@@ -219,15 +217,11 @@
             <th>Date Created</th>
             <th>Content</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
           <tr>
-
-          <tr>
-          <td>${commentCreatedAt}</td>
-          <td>${commentContent} </td>
-          <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
-          <td><a href="/comments/${commentId}/delete" </a>Delete Comment</td>
+            <td>${commentCreatedAt}</td>
+            <td>${commentContent} </td>
+            <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
           </tr>
           </table>
       `
@@ -248,17 +242,15 @@
               <th>Target Completion Date</th>
               <th>Completion Date</th>
               <th>Edit</th>
-              <th>Delete</th>
             </tr>
             <tr>
-            <td>${this.name}</td>
-            <td>${this.description} </td>
-            <td>${this.company_name} </td>
-            <td>${this.username} </td>
-            <td>${formatTargetDate} </td>
-            <td>${formatCompleteDate} </td>
-            <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
-            <td><a href="/projects/${this.id}/delete" </a>Delete Project</td>
+              <td>${this.name}</td>
+              <td>${this.description} </td>
+              <td>${this.company_name} </td>
+              <td>${this.username} </td>
+              <td>${formatTargetDate} </td>
+              <td>${formatCompleteDate} </td>
+              <td><a href="/projects/${this.id}/edit" </a>Edit Project</td>
             </tr>
           </table>
 
@@ -275,21 +267,16 @@
             <th>Date Created</th>
             <th>Content</th>
             <th>Edit</th>
-            <th>Delete</th>
           </tr>
           <tr>
-
-          <tr>
-          <td>${commentCreatedAt}</td>
-          <td>${commentContent} </td>
-          <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
-          <td><a href="/comments/${commentId}/delete" </a>Delete Comment</td>
+            <td>${commentCreatedAt}</td>
+            <td>${commentContent} </td>
+            <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
           </tr>
-          </table>
+        </table>
       `
       return postHtml
 
-      // How to delete comment?
 
       }
     }
