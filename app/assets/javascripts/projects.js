@@ -173,12 +173,15 @@
 
 
     formatShow() {
+      // First iterate over comments array of objects to create an array, then loop over the array to return single value.
       let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
       let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
 
-
+      Object.keys(commentContent.forEach(key, index) => ) {
+        return(key, comment[key])
+      }
       // for(let i = 0; i < comment.length; i++){  console.log(comment[i]); }
       // var comment = commentContent
       // for (let comment = 0; comment < comment.length; comment++) {
