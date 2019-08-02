@@ -173,10 +173,18 @@
 
 
     formatShow() {
-      let commentContent = this.comments.map(function (comment) { return ( `${comment.content}` ) })
-      let commentCreatedAt = this.comments.map(function (comment) { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
-      let commentId = this.comments.map(function(comment) { return ( `${comment.id}` ) })
+      let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
+      let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
+      let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
+
+
+      // for(let i = 0; i < comment.length; i++){  console.log(comment[i]); }
+      // var comment = commentContent
+      // for (let comment = 0; comment < comment.length; comment++) {
+      //   return ( `${comment.content}` );
+      // }
+
 
       if (this.completion_date === null) {
 
