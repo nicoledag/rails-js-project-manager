@@ -173,7 +173,6 @@
 
 
     formatShow() {
-      // First iterate over comments array of objects to create an array, then loop over the array to return single value.
       let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
       let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
