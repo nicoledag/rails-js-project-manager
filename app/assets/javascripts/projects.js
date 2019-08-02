@@ -179,16 +179,6 @@
       let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
 
-      Object.keys(commentContent.forEach(key, index) => ) {
-        return(key, comment[key])
-      }
-      // for(let i = 0; i < comment.length; i++){  console.log(comment[i]); }
-      // var comment = commentContent
-      // for (let comment = 0; comment < comment.length; comment++) {
-      //   return ( `${comment.content}` );
-      // }
-
-      //comment
 
       if (this.completion_date === null) {
 
