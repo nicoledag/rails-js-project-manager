@@ -4,9 +4,9 @@ This is a Rails project management application which any business can use to cre
 
 Install Instructions
 
-git clone git@github.com:nicoledag/rails-project-manager-app.git
+git clone git@github.com:nicoledag/rails-js-project-manager-app.git
 
-cd rails-project-manager-app
+cd rails-js-project-manager-app
 
 bundle install
 
@@ -21,4 +21,4 @@ Authors: Nicole Dagnenica
 Technology Used: Object Oriented Ruby programming language, Session and Bcrypt for secure session, Active Record for database management, HTML and SCSS for styling, Photoshop for design work.
 
 License: The gem is available as open source under the terms of the MIT License.
-# rails-project-manager
+# rails-js-project-manager
