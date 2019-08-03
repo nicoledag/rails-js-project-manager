@@ -37,9 +37,21 @@
         .then(project => {
         let newProject = new Project(project)
         // console.log(newProject);
+
         let postHtml = newProject.formatShow()
         $('#app-container').append(postHtml)
-      })
+
+        let projectComments = newProject.comments
+        projectComments.forEach(comment => {
+        let newComment = new Comment(comment);
+        // console.log(newComment);
+
+        let postHtmlComment = newComment.formatComment()
+        // console.log(postHtml);
+        $('#app-container').append(postHtmlComment)
+
+        })
+       })
      })
 
      // Event handler to submit form via AJAX.
@@ -92,11 +104,12 @@
               let dateA = new Date(a.target_completion_date), dateB = new Date(b.target_completion_date);
               return dateA - dateB;
             })
-            console.log(openProjects);
+            // console.log(openProjects);
             openProjects.map(project => {
               let newProject = new Project(project)
-              console.log(newProject);
+              // console.log(newProject);
               let postHtml = newProject.formatIndex()
+              // console.log(postHtml);
               $('.open-data').append(postHtml)
             })
         })
@@ -124,6 +137,29 @@
          })
      }
 
+    class Comment {
+      constructor(comment){
+         this.content = comment.content
+         this.id = comment.id
+         this.created_at = comment.created_at
+     }
+
+     formatComment() {
+       let commentCreatedAt = new Date(`${this.created_at}`).toLocaleString().split(',')[0]
+
+       let postHtmlComment = `
+        <br>
+        <h2>Comment:  ${this.content}</h2>
+        <h2> Date Created:  ${commentCreatedAt} </h2>
+        <h3><a href="/comments/${this.id}/edit" </a>Edit Comment</h3>
+        <br>
+
+       `
+       return postHtmlComment
+
+     }
+
+}
 
    class Project {
     constructor(project) {
@@ -173,11 +209,7 @@
 
 
     formatShow() {
-      let commentContent = this.comments.map(comment => { return ( `${comment.content}` ) })
-      let commentCreatedAt = this.comments.map(comment => { return ( new Date (`${comment.created_at}`).toLocaleString().split(',')[0] ) })
-      let commentId = this.comments.map(comment => { return ( `${comment.id}` ) })
       let formatTargetDate = new Date(`${this.target_completion_date}`).toLocaleString().split(',')[0]
-
 
       if (this.completion_date === null) {
 
@@ -205,24 +237,11 @@
         </table>
         <br>
         <br>
-        <br>
+
         <h2>Project Comments</h2>
-        <a href="/projects/${this.id}/comments/new">New Comment</a>
-        <br>
+        <h3><a href="/projects/${this.id}/comments/new">New Comment</a><h/3>
         <br>
 
-        <table id="table-js" >
-          <tr>
-            <th>Date Created</th>
-            <th>Content</th>
-            <th>Edit</th>
-          </tr>
-          <tr>
-            <td>${commentCreatedAt}</td>
-            <td>${commentContent} </td>
-            <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
-          </tr>
-          </table>
       `
       return postHtml
 
@@ -255,28 +274,12 @@
 
         <br>
         <br>
-        <br>
-        <h2>Project Comments</h2>
-        <a href="/projects/${this.id}/comments/new">New Comment</a>
-        <br>
-        <br>
 
-        <table id="table-js" >
-          <tr>
-            <th>Date Created</th>
-            <th>Content</th>
-            <th>Edit</th>
-          </tr>
-          <tr>
-            <td>${commentCreatedAt}</td>
-            <td>${commentContent} </td>
-            <td><a href="/comments/${commentId}/edit" </a>Edit Comment</td>
-          </tr>
-        </table>
+        <h2>Project Comments</h2>
+        <h3><a href="/projects/${this.id}/comments/new">New Comment</a><h3>
+        <br>
       `
       return postHtml
-
-
 
       }
     }
